@@ -1,3 +1,5 @@
+package class_relationships;
+
 public class Association {
     public static void main(String[] args) throws Exception {
 
@@ -25,6 +27,7 @@ class Costumer {
         this.name = name;
     }
 
+    //Class Product is used as parameter in a method in the Costumer class
     void buy (Product p){
         p.stock_amt -= 1; 
     }
