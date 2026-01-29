@@ -1,3 +1,4 @@
+package class_relationships;
 import java.util.HashMap;
 import java.util.Scanner;
 
