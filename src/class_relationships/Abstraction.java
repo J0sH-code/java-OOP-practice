@@ -2,7 +2,6 @@ package class_relationships;
 
 public class Abstraction {
     public static void main(String[] args) {
-
         var car = new Car("Honda", "Sedan", "Blue");
         car.go();
     }
@@ -20,6 +19,7 @@ abstract class Vehicle {
     }
 
     abstract void go();
+    abstract void stop();
 }
 
 class Car extends Vehicle {
@@ -31,6 +31,11 @@ class Car extends Vehicle {
     @Override
     void go(){
         System.out.println("Car is on GO zoom! zoom!");
+    }
+
+    @Override
+    void stop(){
+        System.out.println("Car is STOPPING shreek! shreek!");
     }
 }
 

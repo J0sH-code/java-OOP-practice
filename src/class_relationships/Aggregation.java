@@ -14,7 +14,6 @@ public class Aggregation {
         System.out.print("Enter store name: ");
         storeName = scanner.nextLine();
         
-
         boolean running = true;
         while (running) { 
             storeProductRelation(running, storeName, myStore);
