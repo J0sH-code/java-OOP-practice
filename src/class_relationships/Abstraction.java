@@ -36,6 +36,7 @@ class Car extends Vehicle {
     @Override
     void stop(){
         System.out.println("Car is STOPPING shreek! shreek!");
+        System.out.println("car has stopped");
     }
 }
 
