@@ -7,11 +7,13 @@ public class Veterinarian {
     String name;
     String specialization;
     int yearsOfExperience;
-    int stressLevel = 50;
+
+    private int stressLevel = 50;
     
     HashMap<String, Pet> assignedPets = new HashMap<>();
 
     public Veterinarian(String name, String specialization, int yearsOfExperience) {
+        stressFloor();
         this.name = name;
         this.specialization = specialization;
         this.yearsOfExperience = yearsOfExperience;
@@ -26,7 +28,16 @@ public class Veterinarian {
         assignPet(pet);
         pet.increaseHealth(25);
         pet.decreaseHunger(10);
+        pet.healthLimit();
         checkPetHealth(pet);
+    }
+
+    void state (){
+        System.out.println("Vet name: " + this.name);
+        System.out.println("Vet specialization: " + this.specialization);
+        System.out.println("Vet years of experience: " + this.yearsOfExperience + "yrs");
+        System.out.println("Vet stress level: " + this.stressLevel);
+        System.out.println("Assigned pets: " + assignedPets.keySet());
     }
 
     private boolean checkPetStatus (Pet pet) {
@@ -35,9 +46,23 @@ public class Veterinarian {
 
     private void assignPet (Pet pet) {
         assignedPets.put(pet.name, pet);
+        pet.vet = this;
     }
 
     private void checkPetHealth (Pet pet) {
-        this.stressLevel = (pet.healthLevel >= 100) ? this.stressLevel-=10 : this.stressLevel;
+        this.stressLevel = (pet.getHealthLevel() >= 100) ? this.stressLevel-=10 : this.stressLevel;
+        stressFloor();
+    }
+
+    final void stressFloor () {
+        this.stressLevel = (this.stressLevel < 0) ? this.stressLevel = 0 : this.stressLevel;
+    }
+
+    public int getStressLevel() {
+        return this.stressLevel;
+    }
+
+    public int setStressLevel(int stressLevel) {
+        return this.stressLevel = stressLevel;
     }
 }

@@ -11,24 +11,18 @@ public class Test {
 
     /* 
     - Tests the play method of pet object -
-     1. Initiialize 
-        - initialHealth
-        - initialHunger
-        - newHealth (null)
-        - newHunger (null)
-     2. @pet.play() initializes play method
-     3. Initialize value of @newHunger and @newHealth
-     4. Test success if initialHealth is greater than newHealth and initialHunger is less than newHunger
+    This is vital in testing whether the pet object's health level is decreased and its hunger level increased.
+    If the condition is met, the test is passed.
     */
     static void testPlay (Pet pet) {
-        int initialHealth = pet.healthLevel;
-        int initialHunger = pet.hungerLevel;
+        int initialHealth = pet.getHealthLevel();
+        int initialHunger = pet.getHungerLevel();
         int newHealth;
         int newHunger;
 
         pet.play();
-        newHealth = pet.healthLevel;
-        newHunger = pet.hungerLevel;
+        newHealth = pet.getHealthLevel();
+        newHunger = pet.getHungerLevel();
 
         System.out.println("Initial health: " + initialHealth + " | New health: " + newHealth);
         System.out.println("Initial hunger: " + initialHunger + " | New hunger: " + newHunger);
@@ -40,15 +34,20 @@ public class Test {
         }
     }
 
+    /* 
+    - Tests the play method of pet object -
+    This is vital in testing whether the pet object is sick and its health level is decreased and its treatment count increased.
+    If the condition is met, the test is passed.
+    */
     static void testSick (Pet pet) {
-        int initialHealth = pet.healthLevel;
-        int initialTreatmentCount = pet.treatmentCount;
+        int initialHealth = pet.getHealthLevel();
+        int initialTreatmentCount = pet.getTreatmentCount();
         int newHealth;
         int newTreatmentCount;
 
         pet.isSick();
-        newHealth = pet.healthLevel;
-        newTreatmentCount = pet.treatmentCount;
+        newHealth = pet.getHealthLevel();
+        newTreatmentCount = pet.getTreatmentCount();
 
         System.out.println("Initial health: " + initialHealth + " | New health: " + newHealth);
         System.out.println("Initial Treatment Count: " + initialTreatmentCount + " | New Treatment Count: " + newTreatmentCount);
@@ -60,17 +59,25 @@ public class Test {
         }
     }
 
+     /* 
+    - Tests the treatment method of veterinarian object -
+    This is vital in testing whether the pet object is added to the veterinarian object's assigned list of pets.
+    It also checks whether the pet's health level increased and its hunger level decreased.
+
+    If pet is not sick, it checks whether pet's health level and hunger level is unchanged, and that the veterinarian object's assigned list of pets is also unchanged.
+    If all the conditions are met, the test is passed.
+    */
     static void testTreatment (Veterinarian vet, Pet pet){
-        int pet_initialHealth = pet.healthLevel;
-        int pet_initialHunger = pet.hungerLevel;
+        int pet_initialHealth = pet.getHealthLevel();
+        int pet_initialHunger = pet.getHungerLevel();
         int pet_newHealth;
         int pet_newHunger;
 
-        int vet_initialStress = vet.stressLevel;
+        int vet_initialStress = vet.getStressLevel();
 
         vet.treatPet(pet);
-        pet_newHealth = pet.healthLevel;
-        pet_newHunger = pet.hungerLevel;
+        pet_newHealth = pet.getHealthLevel();
+        pet_newHunger = pet.getHungerLevel();
 
         if (pet.isSick == false) {
             String treatmentStatus = (vet.assignedPets.isEmpty()) ? "Empty" : "Not-empty";
@@ -94,6 +101,30 @@ public class Test {
             testSuccess("TestTreatment");
         } else {
             testFail("TestTreatment");
+        }
+    }
+
+     /* 
+    - Tests the limiters/floor methods of pet and veterinarian objects -
+    This is to know whether pet's health does not exceed 100 and veterinarian's stress level does not plummet below 0
+    If conditions are met, the test is passed.
+    */
+    static void testLimiters (Pet pet, Veterinarian vet) {
+        int petMaxHealth = pet.setHealthLevel(105);
+        int vetMinStress = vet.setStressLevel(-15);
+
+        pet.healthLimit();
+        vet.stressFloor();
+        int petHealth = pet.getHealthLevel();
+        int vetStress = vet.getStressLevel();
+
+        System.out.println("Overriden health: " + petMaxHealth + " | Actual pet health: " + petHealth);
+        System.out.println("Overriden vet stress level: " + vetMinStress + " | Actual vet stress level: " + vetStress);
+
+        if (petHealth <= 100 && vetStress >= 0) {
+            testSuccess("testLimiters");
+        } else {
+            testFail("testLimiters");
         }
     }
 }
