@@ -20,12 +20,21 @@ public class Test {
         int newHealth;
         int newHunger;
 
+        System.out.println();
+        System.out.println("v- Initial state -v");
+        pet.state();
+
         pet.play();
         newHealth = pet.getHealthLevel();
         newHunger = pet.getHungerLevel();
 
+        System.out.println("v- New state -v");
+        pet.state();
+
         System.out.println("Initial health: " + initialHealth + " | New health: " + newHealth);
         System.out.println("Initial hunger: " + initialHunger + " | New hunger: " + newHunger);
+        
+
 
         if (initialHealth > newHealth && initialHunger < newHunger) {
             testSuccess("testPlay");
@@ -45,9 +54,16 @@ public class Test {
         int newHealth;
         int newTreatmentCount;
 
+        System.out.println();
+        System.out.println("v- Initial state -v");
+        pet.state();
+
         pet.isSick();
         newHealth = pet.getHealthLevel();
         newTreatmentCount = pet.getTreatmentCount();
+        
+        System.out.println("v- Initial state -v");
+        pet.state();
 
         System.out.println("Initial health: " + initialHealth + " | New health: " + newHealth);
         System.out.println("Initial Treatment Count: " + initialTreatmentCount + " | New Treatment Count: " + newTreatmentCount);
@@ -73,15 +89,14 @@ public class Test {
         int pet_newHealth;
         int pet_newHunger;
 
-        int vet_initialStress = vet.getStressLevel();
-
         vet.treatPet(pet);
         pet_newHealth = pet.getHealthLevel();
         pet_newHunger = pet.getHungerLevel();
 
         if (pet.isSick == false) {
             String treatmentStatus = (vet.assignedPets.isEmpty()) ? "Empty" : "Not-empty";
-
+            
+            System.out.println();
             System.out.println("Initial health: " + pet_initialHealth + " | New health: " + pet_newHealth);
             System.out.println("Initial hunger: " + pet_initialHunger + " | New hunger: " + pet_newHunger);
             System.out.println("Vet treatment list status: " + treatmentStatus);
@@ -109,7 +124,7 @@ public class Test {
     This is to know whether pet's health does not exceed 100 and veterinarian's stress level does not plummet below 0
     If conditions are met, the test is passed.
     */
-    static void testLimiters (Pet pet, Veterinarian vet) {
+    static void testLimiters (Veterinarian vet, Pet pet) {
         int petMaxHealth = pet.setHealthLevel(105);
         int vetMinStress = vet.setStressLevel(-15);
 
@@ -118,6 +133,7 @@ public class Test {
         int petHealth = pet.getHealthLevel();
         int vetStress = vet.getStressLevel();
 
+        System.out.println();
         System.out.println("Overriden health: " + petMaxHealth + " | Actual pet health: " + petHealth);
         System.out.println("Overriden vet stress level: " + vetMinStress + " | Actual vet stress level: " + vetStress);
 

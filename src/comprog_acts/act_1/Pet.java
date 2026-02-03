@@ -23,24 +23,22 @@ public class Pet {
     }
     
     void state() {
-        String status = (isSick == false) ? "Sick" : "Healthy";
+        String status = (this.isSick == false) ? "Sick" : "Healthy";
+        String vetName = (this.vet == null || this.vet.name == null) ? "Null" : this.vet.name;
+
+        System.out.println();
         System.out.println("Pet name: " + this.name);
         System.out.println("Pet hunger level: " + this.hungerLevel);
         System.out.println("Pet treatment count: " + this.treatmentCount);
         System.out.println("Pet status: " + status);
-        System.out.println("Assigned vet: " + this.vet.name);
+        System.out.println("Assigned vet: " + vetName);
+        System.out.println();
     }
 
-    private void decreaseHealth(int value) {
-        this.healthLevel-=value;
-    }
-
-    private void increaseHunger (int value) {
-        this.hungerLevel+=value;
-    }
-
-    final void healthLimit () {
-        this.healthLevel = (this.healthLevel > 100) ? 100 : this.healthLevel;
+    void recieveTreatment () {
+        increaseHealth(25);
+        decreaseHunger(10);
+        healthLimit();
     }
 
     void play() {
@@ -60,6 +58,18 @@ public class Pet {
 
     void decreaseHunger (int value) {
         this.hungerLevel-= value;
+    }
+
+    private void decreaseHealth(int value) {
+        this.healthLevel-=value;
+    }
+
+    private void increaseHunger (int value) {
+        this.hungerLevel+=value;
+    }
+
+    final void healthLimit () {
+        this.healthLevel = (this.healthLevel > 100) ? 100 : this.healthLevel;
     }
 
     public int getHealthLevel() {

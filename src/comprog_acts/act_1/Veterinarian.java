@@ -26,18 +26,18 @@ public class Veterinarian {
             return;
         }
         assignPet(pet);
-        pet.increaseHealth(25);
-        pet.decreaseHunger(10);
-        pet.healthLimit();
+        pet.recieveTreatment();
         checkPetHealth(pet);
     }
 
     void state (){
+        System.out.println();
         System.out.println("Vet name: " + this.name);
         System.out.println("Vet specialization: " + this.specialization);
         System.out.println("Vet years of experience: " + this.yearsOfExperience + "yrs");
         System.out.println("Vet stress level: " + this.stressLevel);
         System.out.println("Assigned pets: " + assignedPets.keySet());
+        System.out.println();
     }
 
     private boolean checkPetStatus (Pet pet) {
