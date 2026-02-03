@@ -9,6 +9,17 @@ public class Test {
         System.out.println(testName + " - failed X");
     }
 
+    /* 
+    - Tests the play method of pet object -
+     1. Initiialize 
+        - initialHealth
+        - initialHunger
+        - newHealth (null)
+        - newHunger (null)
+     2. @pet.play() initializes play method
+     3. Initialize value of @newHunger and @newHealth
+     4. Test success if initialHealth is greater than newHealth and initialHunger is less than newHunger
+    */
     static void testPlay (Pet pet) {
         int initialHealth = pet.healthLevel;
         int initialHunger = pet.hungerLevel;
@@ -42,7 +53,7 @@ public class Test {
         System.out.println("Initial health: " + initialHealth + " | New health: " + newHealth);
         System.out.println("Initial Treatment Count: " + initialTreatmentCount + " | New Treatment Count: " + newTreatmentCount);
 
-        if (pet.isSick == true && initialHealth > newHealth && initialTreatmentCount < newHealth) {
+        if (pet.isSick == true && initialHealth > newHealth && initialTreatmentCount < newTreatmentCount) {
             testSuccess("testSick");
         } else {
             testFail("testSick");
