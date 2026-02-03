@@ -19,11 +19,18 @@ public class Veterinarian {
     }
 
     void treatPet (Pet pet) {
-        pet.vet = this;
+        if (checkPetStatus(pet) == true) {
+            System.out.println(pet.name + " is not sick");
+            return;
+        }
+        assignPet(pet);
         pet.increaseHealth(25);
         pet.decreaseHunger(10);
-        assignPet(pet);
         checkPetHealth(pet);
+    }
+
+    private boolean checkPetStatus (Pet pet) {
+        return (pet.isSick == false);
     }
 
     private void assignPet (Pet pet) {
