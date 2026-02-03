@@ -62,7 +62,7 @@ public class Test {
         newHealth = pet.getHealthLevel();
         newTreatmentCount = pet.getTreatmentCount();
         
-        System.out.println("v- Initial state -v");
+        System.out.println("v- New state -v");
         pet.state();
 
         System.out.println("Initial health: " + initialHealth + " | New health: " + newHealth);

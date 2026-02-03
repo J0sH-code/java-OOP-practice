@@ -22,7 +22,8 @@ public class Veterinarian {
 
     void treatPet (Pet pet) {
         if (checkPetStatus(pet) == true) {
-            System.out.println(pet.name + " is not sick");
+            System.out.println();
+            System.out.println("***" + pet.name + " is not sick***");
             return;
         }
         assignPet(pet);
