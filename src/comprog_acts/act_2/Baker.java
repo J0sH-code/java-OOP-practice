@@ -6,13 +6,20 @@ public class Baker {
     private int breadStock;
     private int fatigue;
 
-    public Baker(String name, String status) {
+    public Baker(String name) {
         this.name = name;
-        this.status = status;
     }
 
     boolean sellBread (Customer customer) {
-        return true;
+        return false;
+    }
+
+    boolean canSellto (Customer customer) {
+        return false;
+    }
+
+    void updateStatus () {
+        
     }
 
     String getName () {

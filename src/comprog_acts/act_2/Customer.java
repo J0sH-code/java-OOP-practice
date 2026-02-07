@@ -6,9 +6,8 @@ public class Customer {
     private int money;
     private int hunger;
 
-    public Customer(String name, String status) {
+    public Customer(String name) {
         this.name = name;
-        this.status = status;
     }
 
     String getName(){
@@ -25,6 +24,22 @@ public class Customer {
 
     void eatBread(){
         
+    }
+
+    void payAndEat() {
+
+    }
+
+    void updateStatus() {
+        
+    }
+
+    boolean hasEnoughMoney () {
+        return false;
+    }
+
+    boolean isWaiting () {
+        return false;
     }
     
 }
