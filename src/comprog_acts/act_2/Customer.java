@@ -2,9 +2,9 @@ package comprog_acts.act_2;
 
 public class Customer {
     public String name;
-    public String status;
+    public String status = "waiting";
     private int money;
-    private int hunger;
+    private int hunger = 0;
 
     public Customer(String name) {
         this.name = name;

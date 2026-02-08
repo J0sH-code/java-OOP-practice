@@ -2,9 +2,9 @@ package comprog_acts.act_2;
 
 public class Baker {
     private String name;
-    private String status;
-    private int breadStock;
-    private int fatigue;
+    private String status = "waiting";
+    private int breadStock = 0;
+    private int fatigue = 0;
 
     public Baker(String name) {
         this.name = name;
@@ -31,7 +31,8 @@ public class Baker {
     }
 
     void bakeBread() {
-
+        this.breadStock += 10;
+        this.fatigue += 5;
     }
 
     void rest() {
