@@ -8,9 +8,16 @@ public class Baker {
 
     public Baker(String name) {
         this.name = name;
+        this.status = (this.fatigue >= 30) ? "resting" : this.status;
     }
 
     boolean sellBread (Customer customer) {
+        if (!status.toLowerCase().equals("resting")) {
+            
+        } else {
+            System.out.println("Baker is resting and cannot sell right now....");
+        }
+        
         return false;
     }
 
@@ -31,12 +38,19 @@ public class Baker {
     }
 
     void bakeBread() {
-        this.breadStock += 10;
-        this.fatigue += 5;
+        if (!status.toLowerCase().equals("resting")) {
+            this.breadStock += 10;
+            this.fatigue += 5;   
+        } else {
+            System.out.println("Baker is resting and cannot bake right now....");
+        }
+        this.status = (this.fatigue >= 30) ? "resting" : this.status;
     }
 
     void rest() {
+        this.fatigue -= 15;
 
+        this.status = (this.fatigue < 30) ? "waiting" : this.status;
     }
 
 }
