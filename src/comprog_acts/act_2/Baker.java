@@ -8,25 +8,51 @@ public class Baker {
 
     public Baker(String name) {
         this.name = name;
-        this.status = (this.fatigue >= 30) ? "resting" : this.status;
+        updateStatus();
     }
 
     boolean sellBread (Customer customer) {
-        if (!status.toLowerCase().equals("resting")) {
-            
-        } else {
+        if (status.toLowerCase().equals("resting")) {
             System.out.println("Baker is resting and cannot sell right now....");
+        }
+
+        if (canSellto(customer)) {
+            this.breadStock -= 10;
+            this.fatigue += 5;
+            this.status = (canSellto(customer)) ? "served" : this.status;
+            customer.payAndEat();  
         }
         
         return false;
     }
 
     boolean canSellto (Customer customer) {
-        return false;
+        if (!customer.getStatus().equals("waiting")) {
+            return false;
+        }
+
+        if (!this.status.equals("waiting")) {
+            return false;
+        }
+
+        if (this.breadStock < 10) {
+            return false;
+        }
+
+        if (!customer.hasEnoughMoney()) {
+            return false;
+        }
+
+        if (this.fatigue > 30) {
+            return false;
+        }
+
+        return true;
     }
 
     void updateStatus () {
-        
+        this.status = (this.fatigue < 30) ? "waiting" : this.status;
+        this.status = (this.fatigue >= 30) ? "resting" : this.status;
     }
 
     String getName () {
@@ -44,13 +70,13 @@ public class Baker {
         } else {
             System.out.println("Baker is resting and cannot bake right now....");
         }
-        this.status = (this.fatigue >= 30) ? "resting" : this.status;
+        updateStatus();
     }
 
     void rest() {
         this.fatigue -= 15;
 
-        this.status = (this.fatigue < 30) ? "waiting" : this.status;
+        updateStatus();
     }
 
 }

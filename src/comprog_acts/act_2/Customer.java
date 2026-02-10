@@ -8,6 +8,7 @@ public class Customer {
 
     public Customer(String name) {
         this.name = name;
+        this.hunger += 10;
     }
 
     String getName(){
@@ -19,23 +20,33 @@ public class Customer {
     }
 
     void work(){
+        this.money += 15;
+        this.hunger += 5;
 
+        if (this.hunger >= 40) {
+            updateStatus();    
+        }
+        
     }
 
     void eatBread(){
-        
+        this.hunger -= 20;
+
+        updateStatus();
     }
 
     void payAndEat() {
-
+        this.money -= 30;
+        this.hunger -= 20;
+        this.status = "served";
     }
 
     void updateStatus() {
-        
+        this.status = (this.hunger < 40) ? "waiting" : this.status;
     }
 
     boolean hasEnoughMoney () {
-        return false;
+        return (this.money > 30);
     }
 
     boolean isWaiting () {
