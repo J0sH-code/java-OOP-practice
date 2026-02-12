@@ -50,7 +50,7 @@ public class Customer {
     }
 
     boolean isWaiting () {
-        return false;
+        return this.status.equals("waiting");
     }
     
 }

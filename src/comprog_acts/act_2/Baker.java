@@ -28,7 +28,7 @@ public class Baker {
     }
 
     boolean canSellto (Customer customer) {
-        if (!customer.getStatus().equals("waiting")) {
+        if (!customer.isWaiting()) {
             return false;
         }
 
