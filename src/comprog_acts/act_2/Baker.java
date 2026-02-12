@@ -20,7 +20,8 @@ public class Baker {
             this.breadStock -= 10;
             this.fatigue += 5;
             this.status = (canSellto(customer)) ? "served" : this.status;
-            customer.payAndEat();  
+            customer.payAndEat();
+            return true;  
         }
         
         return false;

@@ -9,6 +9,7 @@ public class Main {
         baker.bakeBread();
         customer.work();
         customer.work();
+        customer.work();
 
         boolean success = baker.sellBread(customer);
 
