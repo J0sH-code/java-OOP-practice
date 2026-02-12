@@ -1,4 +1,4 @@
-package comprog_acts.act_2;
+package comprog_acts.SantenoBuenaventura;
 
 public class Main {
     public static void main(String[] args){

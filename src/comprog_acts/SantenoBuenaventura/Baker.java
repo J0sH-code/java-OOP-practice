@@ -1,7 +1,7 @@
-package comprog_acts.act_2;
+package comprog_acts.SantenoBuenaventura;
 
 public class Baker {
-    private String name;
+    private final String name;
     private String status = "waiting";
     private int breadStock = 0;
     private int fatigue = 0;

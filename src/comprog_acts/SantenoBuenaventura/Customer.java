@@ -1,8 +1,8 @@
-package comprog_acts.act_2;
+package comprog_acts.SantenoBuenaventura;
 
 public class Customer {
-    public String name;
-    public String status = "waiting";
+    private final String name;
+    private String status = "waiting";
     private int money;
     private int hunger = 0;
 
