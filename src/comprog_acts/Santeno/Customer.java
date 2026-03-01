@@ -1,4 +1,4 @@
-package comprog_acts.SantenoBuenaventura;
+package comprog_acts.Santeno;
 
 public class Customer {
     private final String name;
