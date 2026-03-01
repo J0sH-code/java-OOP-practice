@@ -1,5 +1,6 @@
 package customer;
 
+import comprog_acts.act_3.TEMPLATE.marketplace.Product;
 import marketplace.*;
 
 public class Customer {
@@ -12,7 +13,10 @@ public class Customer {
 	public final static int MAX_PRODUCTS = 3;
 	
 	public Customer(String name, String address, String number, float coins) {
-		// TODO: Complete this constructor
+		this.name = name;
+		this.address = address;
+		this.number = number;
+		this.coins = coins;
 	}
 
 	protected boolean canAfford(Product item) {
