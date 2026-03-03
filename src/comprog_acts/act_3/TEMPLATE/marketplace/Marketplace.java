@@ -9,6 +9,7 @@ public class Marketplace extends Shop {
     @Override
     public void add(Product item) {
         this.itemCounter++;
+        ((Gadget)item).setItemNumber(itemCounter);
         Product[] prevItems = this.items;
 		this.items = new Product[this.itemCounter];
 
@@ -38,6 +39,7 @@ public class Marketplace extends Shop {
                 this.items[i] = prevItems[i+1];
             }
         }
+        this.itemCounter--;
     }
 
     private int findItemIndex (Product[] list, Product item) {
@@ -49,30 +51,38 @@ public class Marketplace extends Shop {
         return 0;
     }
 
-    public void purchaseHandler(Product item) {
-        for (int i = 0; i < this.items.length; i++) {
-            if (this.items[i].classification.equals(item.classification)) {
-                this.items[i].demand += 3;
+    public void purchaseHandler(Product boughtItem) {
 
-                if (this.items[i].demand <= 10) {
-                    if (this.items[i].condition.equals(Gadget.COND_GOOD)) {
-                        this.items[i].price -= (this.items[i].price * 0.15);
-                        this.items[i].demand-=10;
-                    }
+    for (int i = 0; i < this.items.length; i++) {
+        if (this.items[i].getClassification().equals(boughtItem.getClassification())) {
+            // Increase demand
+            int newDemand = this.items[i].getDemand() + 3;
+            this.items[i].setDemand(newDemand);
 
-                    if (this.items[i].condition.equals(Gadget.COND_MINT)) {
-                        this.items[i].price -= (this.items[i].price * 0.10);
-                        this.items[i].demand-=10;
-                    }
+            // Apply discount only if demand >= 10
+            if (this.items[i].getDemand() >= 10) {
 
-                    if (this.items[i].condition.equals(Gadget.COND_LIKE_NEW)) {
-                        this.items[i].price -= (this.items[i].price * 0.05);
-                        this.items[i].demand-=10;
-                    }
+                float oldPrice = this.items[i].getPrice();
+                float newPrice = oldPrice;
+
+                if (this.items[i].getCondition().equals(Gadget.COND_GOOD)) {
+                    newPrice = oldPrice * 0.85f;
                 }
+
+                else if (this.items[i].getCondition().equals(Gadget.COND_MINT)) {
+                    newPrice = oldPrice * 0.90f;
+                }
+
+                else if (this.items[i].getCondition().equals(Gadget.COND_LIKE_NEW)) {
+                    newPrice = oldPrice * 0.95f;
+                }
+
+                this.items[i].setPrice(newPrice);
+                this.items[i].setDemand(this.items[i].getDemand() - 10);
             }
         }
     }
+}
 
     @Override
     protected boolean find(Product item) {
@@ -85,22 +95,23 @@ public class Marketplace extends Shop {
     }
 
     @Override
-    protected void transact(Product item) {
+    public void transact(Product item) {
+        this.sales += item.getPrice();
         remove(item);
+        purchaseHandler(item);
     }
-
     @Override
     public void viewProducts() {
         System.out.println(this.name);
         for (int i = 0; i < this.items.length; i++) {
             System.out.println();
-            System.out.println("Item " + (i+1) +": ");
+            System.out.println("Item " + ((Gadget)this.items[i]).getItemNumber() +": ");
             System.out.println("Brand: " + this.items[i].brand);
             System.out.println("Model: " + this.items[i].model);
             System.out.println("Price: " + this.items[i].price);
             System.out.println("Condition: " + this.items[i].condition);
             System.out.println("Classification: " + this.items[i].classification);
-            System.out.println("Demand PointsL: " + this.items[i].demand);
+            System.out.println("Demand Points: " + this.items[i].demand);
         }
     }
 

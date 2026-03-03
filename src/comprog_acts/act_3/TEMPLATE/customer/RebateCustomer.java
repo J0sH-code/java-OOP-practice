@@ -13,7 +13,6 @@ public class RebateCustomer extends Customer{
 
     @Override
     public void buy(Product item, Marketplace marketplace) {
-        // TODO Auto-generated method stub
         super.buy(item, marketplace);
         this.coins+=rebateCoins(rebatePower, item);
     }

@@ -17,10 +17,12 @@ public class Customer {
 		this.address = address;
 		this.number = number;
 		this.coins = coins;
+		this.items = new Product[0];
+    	this.itemCounter = 0; 
 	}
 
 	protected boolean canAfford(Product item) {
-		return (this.coins > item.getPrice());
+		return (this.coins >= item.getPrice());
 	}
 	
 	/*
@@ -61,16 +63,17 @@ public class Customer {
 		if (itemValidate(item, marketplace) && canAfford(item) && maxItemValidate(this.itemCounter, MAX_PRODUCTS)) {
 			this.coins -= item.getPrice();
 			this.itemCounter++;
-			marketplace.remove(item);
+			marketplace.transact(item);
 			addItem(itemCounter, item);
-			marketplace.purchaseHandler(item);
 			System.out.println("**LOG: The item " + item.getName() + " was successfully bought by customer " + this.getName() + ".");
 		}
 	}
 
 	private boolean itemValidate (Product item, Marketplace marketplace) {
 		for (int i = 0; i < marketplace.getItems().length; i++) {
-			return (marketplace.getItems()[i] == item);
+			if (marketplace.getItems()[i] == item) {
+            	return true;
+        	}
 		}
 		return false;
 	}

@@ -1,7 +1,7 @@
 package app;
 
-import marketplace.*;
 import customer.*;
+import marketplace.*;
 
 /* DO NOT MODIFY THIS FILE */
 class Main {

@@ -1,6 +1,7 @@
 package marketplace;
 
-public class Gadget extends Product{
+public class Gadget extends Product {
+
     public static String COND_LIKE_NEW = "like new";
     public static String COND_GOOD = "good";
     public static String COND_MINT = "mint";
@@ -10,25 +11,27 @@ public class Gadget extends Product{
     public static String CLASS_COMPUTER = "computer";
 
     protected boolean purchaseStatus = false;
+    private int itemNumber;
 
-    public Gadget(String brand, String model, float price, String condition, String classification){
+    public Gadget(String brand, String model, float price, String condition, String classification) {
         super(brand, model, price, condition, classification);
     }
+
     @Override
     protected void setPrice(float price) {
         this.price = price;
     }
-    
+
     @Override
     protected void setDemand(int demand) {
         this.demand = demand;
     }
 
-    public void isPurchaced() {
-        this.purchaseStatus = true;
+    public void setItemNumber(int number) {
+        this.itemNumber = number;
     }
 
-    public boolean getPurchaseStatus() {
-        return this.purchaseStatus;
+    public int getItemNumber() {
+        return this.itemNumber;
     }
 }
