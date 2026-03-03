@@ -1,6 +1,5 @@
 package customer;
 
-import comprog_acts.act_3.TEMPLATE.marketplace.Product;
 import marketplace.*;
 
 public class Customer {
