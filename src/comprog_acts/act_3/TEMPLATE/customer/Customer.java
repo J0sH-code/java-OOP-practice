@@ -20,7 +20,7 @@ public class Customer {
 	}
 
 	protected boolean canAfford(Product item) {
-		// TODO: Complete this method
+		return (this.coins > item.getPrice());
 	}
 	
 	/*
@@ -44,7 +44,53 @@ public class Customer {
 	 */
 
 	public void buy(Product item, Marketplace marketplace){
-		// TODO: Complete this method
+		System.out.println("**LOG: Customer " + this.name + " is trying to buy " + item.getName() + " from " + marketplace.getName() + ".");
+
+		if (!maxItemValidate(itemCounter, MAX_PRODUCTS)) {
+			System.out.println("**LOG: Maximum number of products is reached.");
+		}
+
+		if (!canAfford(item)) {
+			System.out.println("**LOG: " + item.getName() + " cannot be purchased because of insufficient funds.");
+		}
+
+		if (!itemValidate(item, marketplace)) {
+			System.out.println("**LOG: The item " + item.getName() + " is not available in the " + marketplace.getName() + ".");
+		}
+
+		if (itemValidate(item, marketplace) && canAfford(item) && maxItemValidate(this.itemCounter, MAX_PRODUCTS)) {
+			this.coins -= item.getPrice();
+			this.itemCounter++;
+			marketplace.remove(item);
+			addItem(itemCounter, item);
+			marketplace.purchaseHandler(item);
+			System.out.println("**LOG: The item " + item.getName() + " was successfully bought by customer " + this.getName() + ".");
+		}
+	}
+
+	private boolean itemValidate (Product item, Marketplace marketplace) {
+		for (int i = 0; i < marketplace.getItems().length; i++) {
+			return (marketplace.getItems()[i] == item);
+		}
+		return false;
+	}
+
+	private boolean maxItemValidate (int itemCounter, int MAX_PRODUCTS) {
+		return (itemCounter < MAX_PRODUCTS);
+	}
+
+	private void addItem (int itemCounter, Product item) {
+		Product[] prevItems = this.items;
+		this.items = new Product[itemCounter];
+
+		if (this.itemCounter == 1) {
+			this.items[0] = item;
+		} 
+
+		if (this.itemCounter > 1) {
+            System.arraycopy(prevItems, 0, this.items, 0, prevItems.length);
+			this.items[itemCounter-1] = item;
+		}
 	}
 	
 	// DO NOT MODIFY THIS METHOD
