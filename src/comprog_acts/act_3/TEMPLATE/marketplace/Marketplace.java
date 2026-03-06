@@ -6,6 +6,7 @@ public class Marketplace extends Shop {
         super(name);
     }
 
+    //Overrides the add method, employs creating a new array to declare in this.items with the added item
     @Override
     public void add(Product item) {
         this.itemCounter++;
@@ -23,6 +24,7 @@ public class Marketplace extends Shop {
 		}
     }
 
+    
     @Override
     public void remove(Product item) {
         Product[] prevItems = this.items;
@@ -52,37 +54,32 @@ public class Marketplace extends Shop {
     }
 
     public void purchaseHandler(Product boughtItem) {
+        for (int i = 0; i < this.items.length; i++) {
+            if (this.items[i].getClassification().equals(boughtItem.getClassification())) {
+                // Increase demand
+                int newDemand = this.items[i].getDemand() + 3;
+                this.items[i].setDemand(newDemand);
 
-    for (int i = 0; i < this.items.length; i++) {
-        if (this.items[i].getClassification().equals(boughtItem.getClassification())) {
-            // Increase demand
-            int newDemand = this.items[i].getDemand() + 3;
-            this.items[i].setDemand(newDemand);
+                // Apply discount only if demand >= 10
+                if (this.items[i].getDemand() >= 10) {
 
-            // Apply discount only if demand >= 10
-            if (this.items[i].getDemand() >= 10) {
+                    float oldPrice = this.items[i].getPrice();
+                    float newPrice = oldPrice;
 
-                float oldPrice = this.items[i].getPrice();
-                float newPrice = oldPrice;
+                    if (this.items[i].getCondition().equals(Gadget.COND_GOOD)) {
+                        newPrice = oldPrice * 0.85f;
+                    } else if (this.items[i].getCondition().equals(Gadget.COND_MINT)) {
+                        newPrice = oldPrice * 0.90f;
+                    } else if (this.items[i].getCondition().equals(Gadget.COND_LIKE_NEW)) {
+                        newPrice = oldPrice * 0.95f;
+                    }
 
-                if (this.items[i].getCondition().equals(Gadget.COND_GOOD)) {
-                    newPrice = oldPrice * 0.85f;
+                    this.items[i].setPrice(newPrice);
+                    this.items[i].setDemand(this.items[i].getDemand() - 10);
                 }
-
-                else if (this.items[i].getCondition().equals(Gadget.COND_MINT)) {
-                    newPrice = oldPrice * 0.90f;
-                }
-
-                else if (this.items[i].getCondition().equals(Gadget.COND_LIKE_NEW)) {
-                    newPrice = oldPrice * 0.95f;
-                }
-
-                this.items[i].setPrice(newPrice);
-                this.items[i].setDemand(this.items[i].getDemand() - 10);
             }
         }
     }
-}
 
     @Override
     protected boolean find(Product item) {
