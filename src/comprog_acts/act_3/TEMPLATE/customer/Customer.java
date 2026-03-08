@@ -81,6 +81,7 @@ public class Customer {
 		return (itemCounter < MAX_PRODUCTS);
 	}
 
+	//Checks the current items list and creates a new instance of this.items that copies its old state and adds the new item
 	private void addItem (int itemCounter, Product item) {
 		Product[] prevItems = this.items;
 		this.items = new Product[itemCounter];
