@@ -17,20 +17,24 @@ public class Gadget extends Product {
         super(brand, model, price, condition, classification);
     }
 
+    //This is a setter for gadget price
     @Override
     protected void setPrice(float price) {
         this.price = price;
     }
 
+    //This is a setter for gadget demand
     @Override
     protected void setDemand(int demand) {
         this.demand = demand;
     }
 
+    //This is a setter for item number
     public void setItemNumber(int number) {
         this.itemNumber = number;
     }
 
+    //This is a getter for item number
     public int getItemNumber() {
         return this.itemNumber;
     }

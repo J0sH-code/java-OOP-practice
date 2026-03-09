@@ -68,6 +68,7 @@ public class Customer {
 		}
 	}
 
+	//Searches through the items in the list to check availability
 	private boolean itemValidate (Product item, Marketplace marketplace) {
 		for (int i = 0; i < marketplace.getItems().length; i++) {
 			if (marketplace.getItems()[i] == item) {
@@ -77,11 +78,15 @@ public class Customer {
 		return false;
 	}
 
+	//Validates if the total items are less than MAX_PRODUCTS
 	private boolean maxItemValidate (int itemCounter, int MAX_PRODUCTS) {
 		return (itemCounter < MAX_PRODUCTS);
 	}
 
-	//Checks the current items list and creates a new instance of this.items that copies its old state and adds the new item
+	/*
+     * Checks the current items list and creates a new 
+     * instance of this.items that copies its old state and adds the new item
+     */
 	private void addItem (int itemCounter, Product item) {
 		Product[] prevItems = this.items;
 		this.items = new Product[itemCounter];

@@ -11,12 +11,14 @@ public class RebateCustomer extends Customer{
         super(name, address, number, coins);
     }
 
+    //Calls the buy method and adds the accumulated rebate coins to this.coins 
     @Override
     public void buy(Product item, Marketplace marketplace) {
         super.buy(item, marketplace);
         this.coins+=rebateCoins(rebatePower, item);
     }
 
+    //Returns the amount of rebate coins
     private float rebateCoins (float rebatePower, Product item) {
         return (item.getPrice() * rebatePower);
     }

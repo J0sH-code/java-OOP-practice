@@ -6,7 +6,11 @@ public class Marketplace extends Shop {
         super(name);
     }
 
-    //Overrides the add method, employs creating a new array to declare in this.items with the added item
+    /*
+     * Overrides the add method,
+     * Checks the current items list and creates a new 
+     * instance of this.items that copies its old state and adds the new item
+     */
     @Override
     public void add(Product item) {
         this.itemCounter++;
@@ -24,7 +28,17 @@ public class Marketplace extends Shop {
 		}
     }
 
-    
+    /**
+     * Removes a product from the marketplace inventory.
+     *
+     * Steps performed:
+     * 1. Store the current list of items in a temporary array.
+     * 2. Create a new array with a size reduced by one.
+     * 3. Determine the index of the product to remove.
+     * 4. Copy all elements before the removed item.
+     * 5. Shift elements after the removed item one position to the left.
+     * 6. Decrement the item counter to reflect the updated inventory size.
+     */
     @Override
     public void remove(Product item) {
         Product[] prevItems = this.items;
@@ -44,6 +58,7 @@ public class Marketplace extends Shop {
         this.itemCounter--;
     }
 
+    //Searches for the index of item in product list, used for remove method
     private int findItemIndex (Product[] list, Product item) {
         for (int i = 0; i < list.length; i++) {
             if (item == list[i]) {
@@ -53,6 +68,24 @@ public class Marketplace extends Shop {
         return 0;
     }
 
+    /**
+     * Handles the effects of a product purchase within the marketplace.
+     *
+     * When a product is purchased, all items with the same classification
+     * will have their demand increased. If the demand of an item reaches
+     * a threshold of 10 or more, a price discount is applied based on
+     * the product's condition.
+     *
+     * Discount rules:
+     * - GOOD condition: 15% discount
+     * - MINT condition: 10% discount
+     * - LIKE_NEW condition: 5% discount
+     *
+     * After the discount is applied, the demand is reduced by 10 to reset
+     * the demand cycle.
+     *
+     * @param boughtItem the product that has been purchased
+     */
     public void purchaseHandler(Product boughtItem) {
         for (int i = 0; i < this.items.length; i++) {
             if (this.items[i].getClassification().equals(boughtItem.getClassification())) {
@@ -81,6 +114,7 @@ public class Marketplace extends Shop {
         }
     }
 
+    //Searches items list to find item product, returns true if found
     @Override
     protected boolean find(Product item) {
         for (int i = 0; i < this.items.length; i++) {
@@ -91,12 +125,14 @@ public class Marketplace extends Shop {
         return false;
     }
 
+    //Removes item from list and purchases the item
     @Override
     public void transact(Product item) {
         this.sales += item.getPrice();
         remove(item);
         purchaseHandler(item);
     }
+
     @Override
     public void viewProducts() {
         System.out.println(this.name);
@@ -119,16 +155,19 @@ public class Marketplace extends Shop {
         System.out.println("Total sales: " + this.sales);
     }
 
+    //Getter for marketplace name
     @Override
     public String getName() {
         return super.name;
     }
 
+    //Getter for marketplace sales
     @Override
     protected float getSales() {
         return super.sales;
     }
 
+    //Getter for marketplace items
     public Product[] getItems() {
         return this.items;
     }
