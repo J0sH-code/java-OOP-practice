@@ -3,7 +3,7 @@ public class Printer {
     // TODO: Add the synchronized keyword to make sure only one thread
     // can access this method at a time
 
-    public void printDocument(String studentName, String documentName) {
+    public synchronized void printDocument(String studentName, String documentName) {
 
         System.out.println(studentName + " started printing " + documentName);
 

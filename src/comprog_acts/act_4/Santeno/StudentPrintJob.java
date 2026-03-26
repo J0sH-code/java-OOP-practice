@@ -1,15 +1,20 @@
 
-public class StudentPrintJob {
+public class StudentPrintJob implements Runnable {
 
-    private String studentName;
-    private String documentName;
-    private Printer printer;
+    private final String studentName;
+    private final String documentName;
+    private final Printer printer;
 
     // constructor
     public StudentPrintJob(String studentName, String documentName, Printer printer) {
         this.studentName = studentName;
         this.documentName = documentName;
         this.printer = printer;
+    }
+
+    @Override
+    public void run() {
+        printer.printDocument(studentName, documentName);
     }
 
     // TODO: Override the run() method
