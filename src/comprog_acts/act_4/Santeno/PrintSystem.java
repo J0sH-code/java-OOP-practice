@@ -1,6 +1,14 @@
 
+/**
+ * PrintSystem demonstrates multi-threaded printing with multiple students.
+ * Each student submits a print job that runs concurrently using separate threads.
+ */
 public class PrintSystem {
 
+    /**
+     * Main entry point that creates and starts multiple student print jobs.
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) {
         Printer printer = new Printer();
         Thread jacob = new Thread(new StudentPrintJob("Jacob", "c++-guide-book.pdf", printer));
